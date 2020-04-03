@@ -17,8 +17,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/places/create', 'PlaceController@create');
-Route::get('/places', 'PlaceController@showAll');
+Route::get('/places/create', 'PlaceController@addNewPlace');
+Route::get('/places', 'PlaceController@showAllPlaces');
 
 Route::post('/save', 'PlaceController@savePlace');
 

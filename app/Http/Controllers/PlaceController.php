@@ -7,13 +7,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App\Place;
 class PlaceController extends Controller
 {
-    public function showAll()
+    public function showAllPlaces()
     {
         $places = \App\Place::all();
         return view('places', compact('places'));
     }
 
-    public function create()
+    public function addNewPlace()
     {
         return view('formAddPlace');
     }
