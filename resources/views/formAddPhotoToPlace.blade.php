@@ -3,7 +3,7 @@
    Add new photo to place : {{$place->name}} or choose other place in drop list
 </h3>
 
-<form action="/savePhoto" method="post">
+<form action="/savePhoto" method="post" enctype="multipart/form-data">
     @csrf
     <label for="places">Place :</label>
     <select name="name" id="places">
@@ -16,7 +16,7 @@
             @endforeach
 
     </select>
-
+    <input type="hidden" name="id" value="{{$place->id}}">
     <input type="file" name="image">
 
     <input type="submit" value="send">

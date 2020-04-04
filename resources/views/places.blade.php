@@ -5,8 +5,7 @@
     <ul>
     @foreach($places as $place)
 
-    <li><a href="/places/{{$place->id}}"> place :{{$place->name}}
-            <br>type :{{$place->type}}
+    <li><a href="/places/{{$place->id}}"> place :{{$place->name}}<br>type :{{$place->type}}
         </a>
     </li>
     @endforeach

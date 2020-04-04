@@ -22,7 +22,7 @@ Route::get('/places', 'PlaceController@showAllPlaces');
 
 Route::post('/save', 'PlaceController@savePlace');
 
-Route::get('/places/{id}', 'PlaceController@showPlaceById');
+Route::get('/places/{id}', 'PlaceController@showPlaceWithPhotosByPlaceId');
 
 Route::get('/places/{id}/photos/add', 'PlaceController@addPhotoToPlace');
 

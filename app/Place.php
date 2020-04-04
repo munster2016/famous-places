@@ -12,6 +12,6 @@ class Place extends Model
 
     public function photos()
     {
-        return $this->hasMany('photo');
+        return $this->hasMany('App\Photos');
     }
 }
