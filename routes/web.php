@@ -11,19 +11,24 @@
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
+
+
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/places/create', 'PlaceController@addNewPlace');
-Route::get('/places', 'PlaceController@showAllPlaces');
+Route::view('/', 'master')->name('home');
 
-Route::post('/save', 'PlaceController@savePlace');
+Route::get('/places/create', 'PlaceController@addNewPlace')->name('create_new_place');
+Route::get('/places', 'PlaceController@showAllPlaces')->name('all_places');
 
-Route::get('/places/{id}', 'PlaceController@showPlaceWithPhotosByPlaceId');
 
-Route::get('/places/{id}/photos/add', 'PlaceController@addPhotoToPlace');
 
-Route::post('/savePhoto','PlaceController@savePhoto');
+Route::get('/places/{id}', 'PlaceController@showPlaceWithPhotosByPlaceId')->name('place_with photo');
+
+Route::get('/places/{id}/photos/add', 'PlaceController@addPhotoToPlace')->name('photoToPlace');
+
+Route::post('/savePlace', 'PlaceController@savePlace')->name('saveOnePlace');
+Route::post('/savePhoto','PlaceController@savePhoto')->name('saveOnePhoto');
+
+Route::get('photos/add', 'PlaceController@addPhotosToAllPhotos')->name('photo_add');
+Route::view('/allPhotos', 'allPhotos')->name('all_photos');

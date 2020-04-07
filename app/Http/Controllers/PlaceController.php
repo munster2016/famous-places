@@ -15,6 +15,8 @@ class PlaceController extends Controller
     public function showAllPlaces()
     {
         $places = \App\Place::all();
+//        dd($places);
+
         return view('places', compact('places'));
     }
 
@@ -33,7 +35,7 @@ class PlaceController extends Controller
     {
         \App\Place::create($request->all());
 
-        return redirect('places');
+        return redirect('/');
     }
 
     /**
@@ -42,8 +44,9 @@ class PlaceController extends Controller
     public function showPlaceWithPhotosByPlaceId($id)
     {
         $place = \App\Place::find($id);
-//        dd($place);
-        return view('showPlaceWithPhotosByPlaceId', compact('place'));
+        $photos = \App\Place::find($id)->photos;
+//dd($photos);
+        return view('showPlaceWithPhotosByPlaceId', compact('photos', 'place'));
     }
 
     /**
@@ -53,8 +56,7 @@ class PlaceController extends Controller
     {
         $place = \App\Place::find($id);
         $allPlaces = \App\Place::all();
-//        dd($places);
-        return view('formAddPhotoToPlace', compact('allPlaces','place'));
+        return view('formAddPhotoToPlace', compact('allPlaces', 'place'));
     }
 
     /**
@@ -62,16 +64,20 @@ class PlaceController extends Controller
      */
     public function savePhoto(Request $request)
     {
+
+//       $path =  $request->file('image')->getClientOriginalName();
 //        dd($request);
+        $file = $request->file('image')->store('images', 'public');
 
-       $path =  $request->file('image')->getClientOriginalName();
+        Photo::create(['place_id' => $request->id, 'name' => $file]);
+        $photos = \App\Place::find(1)->photos;
 
-       $request->file('image')->storeAs('images', $path);
-//dd($path);
-        Photo::create(['photo_id'=>$request->id, 'name' => $path]);
-//        $places = \App\Photo::find(5)->photos;
-//        dd($places);
+        return redirect('/');
+    }
 
-    return redirect('places');
+    public function addPhotosToAllPhotos()
+    {
+        return view('addPhotoToListe');
     }
 }
+

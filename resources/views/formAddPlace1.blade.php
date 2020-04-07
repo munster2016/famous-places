@@ -1,6 +1,6 @@
 
 <h2>add your new place :</h2>
-<form action="/save" method="post">
+<form action="{{route('saveOnePlace')}}" method="post">
     @csrf
     <p>add your new place :<input type="text" name="name"></p>
     <label for="place">Choose a type :</label>
@@ -12,3 +12,7 @@
     <br>
     <input type="submit" value="save">
 </form>
+
+
+
+<button><a href="{{route('home')}}">go to start page</a></button>
