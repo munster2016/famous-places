@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>Page - @yield('title')</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -50,15 +50,24 @@
 
         .links > a {
             color: #636b6f;
-            padding: 0 25px;
-            font-size: 13px;
+            padding: 0 35px;
+            font-size: 15px;
             font-weight: 600;
             letter-spacing: .1rem;
             text-decoration: none;
             text-transform: uppercase;
+
         }
+
+        .links > a :hover {
+            color: blue;
+            text-decoration: underline;
+        }
+
+
         .links{
             text-align: center;
+            margin: auto;
         }
 
         .m-b-md {
@@ -68,21 +77,26 @@
 </head>
 <body>
 <div class="title m-b-md">
-    Start page(variable)
+    @yield('name_of_page')
 </div>
-<div class="links">
-    <a href="{{ route('all_places') }}">all places</a>
-    <a href="{{ route('create_new_place') }}">create new place</a>
-    <a href="#">add a new photo to place</a>
-    <a href="{{ route('photo_add') }}">add a new photo</a>
-    <a href="{{ route('all_photos') }}">all photos</a>
+<div class="links" style="background-color: gainsboro; height: 99px;line-height: 99px">
+
+            <a href="{{ route('home') }}">all places</a>
+            <a href="{{ route('create_new_place') }}">create new place</a>
+            <a href="{{ route('photoToPlace', 1) }}">add new photo to place</a>
+            <a href="{{ route('photo_add') }}">add new photo to collection</a>
+           <a href="{{ route('all_photos') }}">all photos</a>
+
 </div>
+<h1 style="text-align: center">@yield('link')</h1>
 <div class="content">
-
+@yield('content')
 
 
 </div>
-
+<div style="height: 150px;background-color: gainsboro">
+    <h2 style="text-align: center;">Footer</h2>
+</div>
 </body>
 </html>
 

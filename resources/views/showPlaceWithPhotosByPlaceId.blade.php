@@ -1,3 +1,11 @@
+@extends('layouts.master')
+
+@section('title', 'choose place with photos')
+
+@section('name_of_page', 'you choose place with photos by places')
+
+@section('content')
+
 <h1>
     you choose place with photos by place's id :
 </h1>
@@ -11,7 +19,7 @@
 {{--<img  src="https://www.stylewe.com/image_cache/resize/335x445/image/catalog/product/2020-01-15/7-jpg-1579069751707.jpeg" class="wwwww" alt="image" width="150px" height="150px">--}}
 @foreach($photos as $photo)
 
-<img  src="/storage/{{$photo->name}}" class="wwwww" alt="image" width="150px" height="150px">
+<img  src="/storage/{{$photo->name}}" class="wwwww" alt="image" width="250px" height="250px">
 
 @endforeach
 
@@ -20,3 +28,5 @@
 
 
 <button><a href="{{route('home')}}">go to start page</a></button>
+
+@endsection

@@ -16,12 +16,15 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'master')->name('home');
+//Route::view('/', 'places')->name('home');
 
 Route::get('/places/create', 'PlaceController@addNewPlace')->name('create_new_place');
-Route::get('/places', 'PlaceController@showAllPlaces')->name('all_places');
+Route::get('/places', 'PlaceController@showAllPlaces')->name('home');
 
 
+
+Route::get('place/{place_id}/addLike', 'PlaceController@addLike');
+Route::get('place/{place_id}/addDislike', 'PlaceController@addDislike');
 
 Route::get('/places/{id}', 'PlaceController@showPlaceWithPhotosByPlaceId')->name('place_with photo');
 
@@ -32,3 +35,9 @@ Route::post('/savePhoto','PlaceController@savePhoto')->name('saveOnePhoto');
 
 Route::get('photos/add', 'PlaceController@addPhotosToAllPhotos')->name('photo_add');
 Route::view('/allPhotos', 'allPhotos')->name('all_photos');
+
+//Route::get('photo/add', 'PlaceController@savePlace');
+
+
+//Route::get('place/{$place_id}/dislike', 'PlaceController@dislike');
+

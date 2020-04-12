@@ -1,31 +1,35 @@
+@extends('layouts.master')
 
-</head>
-<body>
+@section('title', 'add photo to liste')
+
+@section('name_of_page', 'download your photo')
+
+@section('link', 'add new photo to collection')
+
+@section('content')
 
 
-<h1>
-    hello, you can below easy download your photos.
-</h1>
-
-<form action="{{route('saveOnePhoto')}}" method="post" enctype="multipart/form-data">
-    @csrf
-    <input type="file" name="image">
-    <input type="submit" value="send">
-</form>
-
-<h3>
+<div style="border: 1px solid red;width: 350px; height: 150px; margin: auto; margin-top:50px">
+    <form action="{{route('saveOnePhoto')}}" method="post" enctype="multipart/form-data">
+        @csrf
+        <p> you can below easy download your photos.</p>
+        <input type="file" name="image"><br>
+        <input type="submit" value="send">
+    </form>
+</div>
+<h2>
     all download photos:
-</h3>
+</h2>
 <?php
 $allPhotos = \App\Photo::all();
 ?>
 
     @foreach ($allPhotos as $photo)
-            <img src="/storage/{{$photo->name}}" alt="image" width="150px" height="150px" value="{{$photo->id}}">
+            <img  src="/storage/{{$photo->name}}" alt="image" width="250px" height="250px" value="{{$photo->id}}">
     @endforeach
 
+<br>
 <button><a href="{{route('home')}}">go to start page</a></button>
+@endsection
 
 
-</body>
-</html>
