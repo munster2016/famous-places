@@ -12,15 +12,18 @@
 */
 
 
-
-
+use App\Http\Controllers\PhotoController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
-//Route::view('/', 'places')->name('home');
+Route::get('photos/add', 'PlaceController@addPhotosToAllPhotos')->name('photo_add');
+
+Route::resource('photos','PhotoController');
+
+Route::view('/', 'places')->name('home');
 
 Route::get('/places/create', 'PlaceController@addNewPlace')->name('create_new_place');
 Route::get('/places', 'PlaceController@showAllPlaces')->name('home');
-
 
 
 Route::get('place/{place_id}/addLike', 'PlaceController@addLike');
@@ -31,13 +34,20 @@ Route::get('/places/{id}', 'PlaceController@showPlaceWithPhotosByPlaceId')->name
 Route::get('/places/{id}/photos/add', 'PlaceController@addPhotoToPlace')->name('photoToPlace');
 
 Route::post('/savePlace', 'PlaceController@savePlace')->name('saveOnePlace');
-Route::post('/savePhoto','PlaceController@savePhoto')->name('saveOnePhoto');
+Route::post('/savePhotoByPlaceId','PlaceController@savePhotoByPlaceId')->name('saveOnePhoto');
 
-Route::get('photos/add', 'PlaceController@addPhotosToAllPhotos')->name('photo_add');
-Route::view('/allPhotos', 'allPhotos')->name('all_photos');
+//Route::get('photos/add', 'PlaceController@addPhotosToAllPhotos')->name('photo_add');
 
-//Route::get('photo/add', 'PlaceController@savePlace');
+Route::get('place/{placeId}/addLikeForPhotos','PlaceController@addLikeForPhotos');
+Route::get('place/{placeId}/addDislikeForPhotos','PlaceController@addDislikeForPhotos');
 
 
-//Route::get('place/{$place_id}/dislike', 'PlaceController@dislike');
+Route::get('/photo/{id}/download','PhotoController@download');
+
+Route::get('locale/{locale}', 'TurnLocaleController@changeLang')->name('locale');
+
+Route::get('json/allPlaces/rating', 'MobileController@placeRank');
+Route::get('mobile/photo/', 'MobileController@photoByPlaceId');
+
+
 

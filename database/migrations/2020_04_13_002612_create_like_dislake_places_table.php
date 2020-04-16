@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLikeDislikePlacesTable extends Migration
+class CreateLikeDislakePlacesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateLikeDislikePlacesTable extends Migration
      */
     public function up()
     {
-        Schema::create('like_dislike_places', function (Blueprint $table) {
+        Schema::create('like_dislake_places', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('place_id');
             $table->integer('liki')->default(0);
@@ -29,6 +29,6 @@ class CreateLikeDislikePlacesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('like_dislike_places');
+        Schema::dropIfExists('like_dislake_places');
     }
 }

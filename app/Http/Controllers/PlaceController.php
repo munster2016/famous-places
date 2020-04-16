@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\LikeDislikePlace;
+use App\LikeDislakePhoto;
+use App\LikeDislakePlace;
 use App\Photo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App\Place;
@@ -18,9 +19,10 @@ class PlaceController extends Controller
     {
         $places = \App\Place::all();
 //        dd($places);
-        $replics = \App\LikeDislikePlace::all();
+        $replicsForPlace = \App\LikeDislakePlace::all();
 
-        return view('places', compact('places', 'replics'));
+
+        return view('places', compact('places', 'replicsForPlace'));
     }
 
     /**
@@ -40,14 +42,18 @@ class PlaceController extends Controller
 
         $getId = \App\Place::count();
 
-        \App\LikeDislikePlace::updateOrCreate(
+        \App\LikeDislakePlace::updateOrCreate(
+            ['place_id'=> $getId]);
 
+        \App\LikeDislakePhoto::updateOrCreate(
             ['place_id'=> $getId]
 
-            );
+        );
 //        $replics = \App\LikeDislikePlace::all();
 
-        return redirect('places');
+        return redirect('places')->with(
+            'status', 'you added new place!'
+        );
     }
 
     /**
@@ -58,7 +64,9 @@ class PlaceController extends Controller
         $place = \App\Place::find($id);
         $photos = \App\Place::find($id)->photos;
 //dd($photos);
-        return view('showPlaceWithPhotosByPlaceId', compact('photos', 'place'));
+        $replicsForPhotos = LikeDislakePhoto::find($id);
+        //dd($replicsForPhotos);
+        return view('showPlaceWithPhotosByPlaceId', compact('photos', 'place', 'replicsForPhotos'));
     }
 
     /**
@@ -74,15 +82,14 @@ class PlaceController extends Controller
     /**
      * save photos with place's id
      */
-    public function savePhoto(Request $request)
+    public function savePhotoByPlaceId(Request $request)
     {
 
 //       $path =  $request->file('image')->getClientOriginalName();
-//        dd($request);
+        //dd($request);
         $file = $request->file('image')->store('images', 'public');
 
         Photo::create(['place_id' => $request->id, 'name' => $file]);
-        $photos = \App\Place::find(1)->photos;
 
         return redirect('places');
     }
@@ -95,7 +102,7 @@ class PlaceController extends Controller
     public function addLike($placeId)
     {
 
-        LikeDislikePlace::
+        LikeDislakePlace::
         where('place_id', $placeId)
             ->increment('liki');
 
@@ -107,13 +114,35 @@ class PlaceController extends Controller
 
     public function addDislike($placeId)
     {
-        LikeDislikePlace::
+        LikeDislakePlace::
         where('place_id', $placeId)
             ->increment('dislike');
 
 //        $dislikes = LikeDislikePlace::find($placeId)->dislike;
 
+
+
         return redirect('places');
+    }
+
+    public function addLikeForPhotos($placeId)
+    {
+
+        LikeDislakePhoto::where('place_id', $placeId)
+            ->increment('liki');
+
+        return redirect('places');
+
+    }
+
+    public function addDislikeForPhotos($placeId)
+    {
+
+        LikeDislakePhoto::where('place_id', $placeId)
+            ->increment('dislike');
+
+        return redirect('places');
+
     }
 
 }

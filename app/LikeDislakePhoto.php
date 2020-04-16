@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class LikeDislikePhoto extends Model
+class LikeDislakePhoto extends Model
 {
     protected $guarded = [];
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLikeDislikePhotosTable extends Migration
+class CreateLikeDislakePhotosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateLikeDislikePhotosTable extends Migration
      */
     public function up()
     {
-        Schema::create('like_dislike_photos', function (Blueprint $table) {
+        Schema::create('like_dislake_photos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('photo_id');
-            $table->integer('like_dislike');
+            $table->integer('place_id');
+            $table->integer('liki')->default(0);
+            $table->integer('dislike')->default(0);
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateLikeDislikePhotosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('like_dislike_photos');
+        Schema::dropIfExists('like_dislake_photos');
     }
 }
